@@ -48,7 +48,6 @@ public class CommandBox extends UiPart<Region> {
             // As up and down buttons will alter the position of the caret,
             // consuming it causes the caret's position to remain unchanged
             keyEvent.consume();
-
             navigateToPreviousInput();
             break;
         case DOWN:
@@ -56,7 +55,7 @@ public class CommandBox extends UiPart<Region> {
             navigateToNextInput();
             break;
         default:
-            // let JavaFx handle the keypress
+           // let JavaFx handle the keypress
         }
     }
 
@@ -107,14 +106,14 @@ public class CommandBox extends UiPart<Region> {
             // process result of the command
             commandTextField.setText("");
             logger.info("Result: " + commandResult.feedbackToUser);
-            raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+            raise(new NewResultAvailableEvent(commandResult.feedbackToUser, true));
 
         } catch (CommandException | ParseException e) {
             initHistory();
             // handle command failure
             setStyleToIndicateCommandFailure();
             logger.info("Invalid command: " + commandTextField.getText());
-            raise(new NewResultAvailableEvent(e.getMessage()));
+            raise(new NewResultAvailableEvent(e.getMessage(), false));
         }
     }
 
