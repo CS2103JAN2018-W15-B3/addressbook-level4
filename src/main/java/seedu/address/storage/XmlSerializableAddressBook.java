@@ -20,7 +20,7 @@ public class XmlSerializableAddressBook {
     @XmlElement
     private List<XmlAdaptedPerson> persons;
     @XmlElement
-    private List<XmlAdaptedTag> tags;
+    private List<XmlAdaptedGroup> groups;
     @XmlElement
     private List<XmlAdaptedToDo> todos;
 
@@ -30,7 +30,7 @@ public class XmlSerializableAddressBook {
      */
     public XmlSerializableAddressBook() {
         persons = new ArrayList<>();
-        tags = new ArrayList<>();
+        groups = new ArrayList<>();
         todos = new ArrayList<>();
     }
 
@@ -40,7 +40,7 @@ public class XmlSerializableAddressBook {
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
-        tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
+        groups.addAll(src.getGroupList().stream().map(XmlAdaptedGroup::new).collect(Collectors.toList()));
         todos.addAll(src.getToDoList().stream().map(XmlAdaptedToDo::new).collect(Collectors.toList()));
     }
 
@@ -48,12 +48,12 @@ public class XmlSerializableAddressBook {
      * Converts this addressbook into the model's {@code AddressBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
-     * {@code XmlAdaptedPerson} or {@code XmlAdaptedTag}.
+     * {@code XmlAdaptedPerson} or {@code XmlAdaptedGroup}.
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (XmlAdaptedTag t : tags) {
-            addressBook.addTag(t.toModelType());
+        for (XmlAdaptedGroup t : groups) {
+            addressBook.addGroup(t.toModelType());
         }
         for (XmlAdaptedPerson p : persons) {
             addressBook.addPerson(p.toModelType());
@@ -61,7 +61,7 @@ public class XmlSerializableAddressBook {
         for (XmlAdaptedToDo todo : todos) {
             addressBook.addToDo(todo.toModelType());
         }
-        addressBook.addColorsToTag();
+        addressBook.addColorsToGroup();
         return addressBook;
     }
 
@@ -76,6 +76,8 @@ public class XmlSerializableAddressBook {
         }
 
         XmlSerializableAddressBook otherAb = (XmlSerializableAddressBook) other;
-        return persons.equals(otherAb.persons) && tags.equals(otherAb.tags) && todos.equals(otherAb.todos);
+        return persons.equals(otherAb.persons) && groups.equals(otherAb.groups) && todos.equals(otherAb.todos);
+
+
     }
 }

@@ -12,11 +12,11 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagNotFoundException;
 import seedu.address.model.todo.ToDo;
 import seedu.address.model.todo.exceptions.DuplicateToDoException;
 
@@ -83,14 +83,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateTag(Tag target, Tag editedTag) throws TagNotFoundException {
-        addressBook.editTag(target, editedTag);
+    public void updateGroup(Group target, Group editedGroup) throws GroupNotFoundException {
+        addressBook.editGroups(target, editedGroup);
         indicateAddressBookChanged();
     }
 
     @Override
-    public void removeTag(Tag tag) {
-        addressBook.removeTag(tag);
+    public void removeGroup(Group group) {
+        addressBook.removeGroup(group);
     }
 
     @Override

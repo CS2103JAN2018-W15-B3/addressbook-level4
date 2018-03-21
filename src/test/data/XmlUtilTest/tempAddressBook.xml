@@ -9,7 +9,7 @@
         <postalCode></postalCode>
         <city></city>
     </persons>
-    <tags>
-        <name>Friends</name>
-    </tags>
+    <groups>
+        <name>CS1010</name>
+    </groups>
 </addressbook>
