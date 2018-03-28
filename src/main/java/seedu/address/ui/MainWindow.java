@@ -37,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private BrowserPanel browserPanel;
     private Calendar calendar;
     private PersonListPanel personListPanel;
+    private ToDoListPanel todoListPanel;
     private Config config;
     private UserPrefs prefs;
 
@@ -51,6 +52,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane todoListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -85,6 +89,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -117,11 +122,14 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        calendar = new Calendar();
+        calendar = new Calendar(logic.getFilteredEventList());
         calendarPlaceholder.getChildren().add(calendar.getCalendarView());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        todoListPanel = new ToDoListPanel(logic.getFilteredToDoList());
+        todoListPanelPlaceholder.getChildren().add(todoListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -132,6 +140,12 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    void redisplayCalendar() {
+        calendarPlaceholder.getChildren().clear();
+        calendar = new Calendar(logic.getFilteredEventList());
+        calendarPlaceholder.getChildren().add(calendar.getCalendarView());
     }
 
     void hide() {

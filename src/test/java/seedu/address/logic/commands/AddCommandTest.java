@@ -21,11 +21,17 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.event.DuplicateEventException;
+import seedu.address.model.event.Event;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagNotFoundException;
+import seedu.address.model.todo.ToDo;
+import seedu.address.model.todo.exceptions.DuplicateToDoException;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -104,6 +110,20 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addEvent(Event event) throws DuplicateEventException {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void addToDo(ToDo todo) throws DuplicateToDoException {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void addGroup(Group group) throws DuplicateGroupException {
+            fail("This method should not be called.");
+        }
+        @Override
         public void updateTag(Tag target, Tag editedTag) throws TagNotFoundException {
             fail("This method should not be called.");
         }
@@ -137,13 +157,30 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateToDo(ToDo target, ToDo editedToDo)
+                throws DuplicateToDoException {
+            fail("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             fail("This method should not be called.");
             return null;
         }
 
         @Override
+        public ObservableList<ToDo> getFilteredToDoList() {
+            fail("This method should not be called.");
+            return null;
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredToDoList(Predicate<ToDo> predicate) {
             fail("This method should not be called.");
         }
     }

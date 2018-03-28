@@ -8,7 +8,15 @@
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
         <link>http://modsn.us/MYwiD</link>
-        <tagged>friends</tagged>
+        <detail>Likes tennis</detail>
+        <tagged>
+            <name>friends</name>
+            <color>undefined</color>
+        </tagged>
+        <tagged>
+            <name>CS3230</name>
+            <color>undefined</color>
+        </tagged>
     </persons>
     <persons>
         <name>Benson Meier</name>
@@ -16,8 +24,19 @@
         <email>johnd@example.com</email>
         <address>311, Clementi Ave 2, #02-25</address>
         <link>http://modsn.us/gka24</link>
-        <tagged>owesMoney</tagged>
-        <tagged>friends</tagged>
+        <detail>Likes tennis</detail>
+        <tagged>
+            <name>owesMoney</name>
+            <color>undefined</color>
+        </tagged>
+        <tagged>
+            <name>friends</name>
+            <color>undefined</color>
+        </tagged>
+        <tagged>
+            <name>CS3230</name>
+            <color>undefined</color>
+        </tagged>
     </persons>
     <persons>
         <name>Carl Kurz</name>
@@ -25,6 +44,7 @@
         <email>heinz@example.com</email>
         <address>wall street</address>
         <link>http://modsn.us/gOVE5</link>
+        <detail>Likes tennis</detail>
     </persons>
     <persons>
         <name>Daniel Meier</name>
@@ -32,6 +52,7 @@
         <email>cornelia@example.com</email>
         <address>10th street</address>
         <link>http://modsn.us/NejPO</link>
+        <detail>Likes tennis</detail>
     </persons>
     <persons>
         <name>Elle Meyer</name>
@@ -39,6 +60,7 @@
         <email>werner@example.com</email>
         <address>michegan ave</address>
         <link>http://modsn.us/TJmxw</link>
+        <detail>Likes tennis</detail>
     </persons>
     <persons>
         <name>Fiona Kunz</name>
@@ -46,14 +68,28 @@
         <email>lydia@example.com</email>
         <address>little tokyo</address>
         <link>http://modsn.us/MQcxm</link>
+        <detail>Likes tennis</detail>
     </persons>
     <persons>
         <name>George Best</name>
         <phone>9482442</phone>
+
+
         <email>anna@example.com</email>
         <address>4th street</address>
         <link>http://modsn.us/hwWlG</link>
+        <detail>Likes tennis</detail>
     </persons>
-    <tags>friends</tags>
-    <tags>owesMoney</tags>
+    <tags>
+        <name>friends</name>
+        <color>undefined</color>
+    </tags>
+    <tags>
+        <name>owesMoney</name>
+        <color>undefined</color>
+    </tags>
+    <tags>
+        <name>CS3230</name>
+        <color>undefined</color>
+    </tags>
 </addressbook>
