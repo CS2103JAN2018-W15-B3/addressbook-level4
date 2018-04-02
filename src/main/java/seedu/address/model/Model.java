@@ -7,6 +7,7 @@ import seedu.address.model.event.DuplicateEventException;
 import seedu.address.model.event.Event;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -69,6 +70,11 @@ public interface Model {
     ObservableList<ToDo> getFilteredToDoList();
 
     /**
+     * Returns an unmodifiable view of the filtered group list
+     */
+    ObservableList<Group> getFilteredGroupList();
+
+    /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
@@ -79,6 +85,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredToDoList(Predicate<ToDo> predicate);
+
+    /**
+     * Updates the filter of the filtered groupList to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredGroupList(Predicate<Group> predicate);
 
     /** Adds the given to-do */
     void addToDo(ToDo todo) throws DuplicateToDoException;
