@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
@@ -54,20 +53,20 @@ public class AddMembersToGroupCommand extends UndoableCommand {
         requireNonNull(model);
         List<Group> groupList = model.getFilteredGroupList();
         List<Person> personList = model.getFilteredPersonList();
-        for(int i=0;i<personList.size();i++) {
-            if(personList.get(i).getName().equals(personToAdd.getName())) {
+        for( int i = 0; i < personList.size() ; i++ ) {
+            if( personList.get(i).getName().equals(personToAdd.getName()) ) {
                 personToAdd=personList.get(i);
             }
         }
-        if(!groupList.contains(groupToAdd)) {
+        if( !groupList.contains(groupToAdd)) {
             throw new CommandException(MESSAGE_NO_SUCH_GROUP);
         }
-        if(!personList.contains(personToAdd)) {
+        if( !personList.contains(personToAdd)) {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
         else{
-            for(Group group : groupList) {
-                if(groupToAdd.getInformation().equals(group.getInformation())){
+            for( Group group : groupList) {
+                if( groupToAdd.getInformation().equals(group.getInformation())){
                     groupToAdd= group;
                     try{
                         groupAdded = group;

@@ -19,4 +19,6 @@ public class GroupTest {
         // same content -> returns true
         assertTrue(groupA.hashCode() == groupB.hashCode());
     }
+
+
 }
