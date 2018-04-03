@@ -32,6 +32,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagNotFoundException;
 import seedu.address.model.todo.ToDo;
 import seedu.address.model.todo.exceptions.DuplicateToDoException;
+import seedu.address.model.todo.exceptions.ToDoNotFoundException;
 import seedu.address.testutil.ToDoBuilder;
 
 public class AddToDoCommandTest {
@@ -152,6 +153,11 @@ public class AddToDoCommandTest {
         }
 
         @Override
+        public void deleteToDo(ToDo target) throws ToDoNotFoundException {
+            fail("This method should not be called.");
+        }
+
+        @Override
         public void updatePerson(Person target, Person editedPerson)
                 throws DuplicatePersonException {
             fail("This method should not be called.");
@@ -176,12 +182,23 @@ public class AddToDoCommandTest {
         }
 
         @Override
+        public ObservableList<Event> getFilteredEventList() {
+            fail("This method should not be called.");
+            return null;
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             fail("This method should not be called.");
         }
 
         @Override
         public void updateFilteredToDoList(Predicate<ToDo> predicate) {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredEventList(Predicate<Event> predicate) {
             fail("This method should not be called.");
         }
     }

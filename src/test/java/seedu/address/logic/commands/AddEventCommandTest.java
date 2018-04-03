@@ -152,6 +152,11 @@ public class AddEventCommandTest {
         }
 
         @Override
+        public void deleteToDo(ToDo target) throws ToDoNotFoundException {
+            fail("This method should not be called.");
+        }
+
+        @Override
         public void updatePerson(Person target, Person editedPerson)
                 throws DuplicatePersonException {
             fail("This method should not be called.");
@@ -175,12 +180,23 @@ public class AddEventCommandTest {
         }
 
         @Override
+        public ObservableList<Event> getFilteredEventList() {
+            fail("This method should not be called.");
+            return null;
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             fail("This method should not be called.");
         }
 
         @Override
         public void updateFilteredToDoList(Predicate<ToDo> predicate) {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredEventList(Predicate<Event> predicate) {
             fail("This method should not be called.");
         }
     }

@@ -85,6 +85,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setGroups(List<Group> groups) throws DuplicateGroupException {
         this.groups.setGroups(groups);
     }
+
+    public void setEvents(List<Event> events) throws DuplicateEventException {
+        this.events.setEvents(events);
+    }
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -96,17 +100,21 @@ public class AddressBook implements ReadOnlyAddressBook {
                 .collect(Collectors.toList());
         List<ToDo> syncedToDoList = newData.getToDoList();
         List<Group> syncedGroupList = newData.getGroupList();
+        List<Event> syncedEventList = newData.getEventList();
 
         try {
             setPersons(syncedPersonList);
             setToDos(syncedToDoList);
             setGroups(syncedGroupList);
+            setEvents(syncedEventList);
         } catch (DuplicatePersonException e) {
             throw new AssertionError("AddressBooks should not have duplicate persons");
         } catch (DuplicateToDoException e) {
             throw new AssertionError("AddressBooks should not have duplicate todos");
         } catch (DuplicateGroupException e) {
             throw new AssertionError("AddressBooks Should not have duplicate groups");
+        } catch (DuplicateEventException e) {
+            throw new AssertionError("AddressBooks Should not have duplicate events");
         }
     }
 
@@ -208,6 +216,19 @@ public class AddressBook implements ReadOnlyAddressBook {
             return true;
         } else {
             throw new PersonNotFoundException();
+        }
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     *
+     * @throws ToDoNotFoundException if the {@code key} is not in this {@code AddressBook}.
+     */
+    public boolean removeToDo(ToDo key) throws ToDoNotFoundException {
+        if (todos.remove(key)) {
+            return true;
+        } else {
+            throw new ToDoNotFoundException();
         }
     }
 
