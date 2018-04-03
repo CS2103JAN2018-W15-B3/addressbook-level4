@@ -1,9 +1,9 @@
 package seedu.address.model.group;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Objects;
 
+import seedu.address.model.person.UniquePersonList;
 /**
  * Represents a Group in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -11,6 +11,7 @@ import java.util.Objects;
 public class Group {
 
     private final Information information;
+    private UniquePersonList personList;
 
     /**
      * Every field must be present and not null.
@@ -18,12 +19,23 @@ public class Group {
     public Group(Information information) {
         requireAllNonNull(information);
         this.information = information;
+        this.personList = new UniquePersonList();
+    }
+    /**
+     * Every field must be present and not null.
+     */
+    public Group(Information information, UniquePersonList personList) {
+        requireAllNonNull(information);
+        this.information = information;
+        this.personList = personList;
     }
 
     public Information getInformation() {
         return information;
     }
-
+    public UniquePersonList getPersonList() {
+        return personList;
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
