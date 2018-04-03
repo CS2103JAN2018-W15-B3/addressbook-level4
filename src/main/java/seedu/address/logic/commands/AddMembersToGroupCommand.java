@@ -7,8 +7,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.exceptions.DuplicateGroupException;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 
@@ -32,15 +35,19 @@ public class AddMembersToGroupCommand extends UndoableCommand {
     public static final String MESSAGE_NO_SUCH_GROUP = "No such group exist.";
     public static final String MESSAGE_ADD_PERSON_TO_GROUP_SUCCESS = "%1$s added to group %2$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "No such person in Fastis";
-    public static final String MESSAGE_DUPLICATE_PERSON= "Person already in Group";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Person already in Group";
+    public static final String MESSAGE_GROUP_NOT_FOUND = "No such Group in Fastis";
+    public static final String MESSAGE_DUPLICATE_GROUP = "Group already in Group";
     
     private Person personToAdd;
     private Group groupToAdd;
+    private Group groupAdded;
     
     public AddMembersToGroupCommand (Person personToAdd , Group groupToAdd) {
         this.personToAdd = personToAdd;
         this.groupToAdd = groupToAdd;
     }
+
 
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
@@ -61,17 +68,23 @@ public class AddMembersToGroupCommand extends UndoableCommand {
         else{
             for(Group group : groupList) {
                 if(groupToAdd.getInformation().equals(group.getInformation())){
+                    groupToAdd= group;
                     try{
-                        group.getPersonList().add(personToAdd);
-
+                        groupAdded = group;
+                        groupAdded.getPersonList().add(personToAdd);
+                        model.updateGroup(groupToAdd,groupAdded);
                     } catch(DuplicatePersonException e){
                         throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+                    } catch(DuplicateGroupException e) {
+                        throw new CommandException(MESSAGE_DUPLICATE_GROUP);
+                    } catch(GroupNotFoundException e) {
+                        throw new CommandException(MESSAGE_GROUP_NOT_FOUND);
                     }
                 }
             }
             return new CommandResult(String.format(MESSAGE_ADD_PERSON_TO_GROUP_SUCCESS, personToAdd.getName(),
                     groupToAdd.getInformation().toString()));
-    }
+        }
     }
 
     @Override
@@ -81,5 +94,6 @@ public class AddMembersToGroupCommand extends UndoableCommand {
                 && personToAdd.equals(((AddMembersToGroupCommand) other).personToAdd));
     }
 
+    
 
 }

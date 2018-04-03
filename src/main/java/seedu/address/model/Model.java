@@ -63,6 +63,16 @@ public interface Model {
     void updateToDo(ToDo target, ToDo editedToDo)
             throws DuplicateToDoException, ToDoNotFoundException;
 
+    /**
+     * Replaces the given Group {@code target} with {@code editedGroup}.
+     *
+     * @throws DuplicateGroupException if updating the Group's details causes the Group to be equivalent to
+     *      another existing Group in the list.
+     * @throws GroupNotFoundException if {@code target} could not be found in the list.
+     */
+    void updateGroup(Group target, Group editedGroup)
+            throws DuplicateGroupException, GroupNotFoundException;
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -100,4 +110,5 @@ public interface Model {
 
     /** Adds the given Event */
     void addEvent(Event event) throws DuplicateEventException;
+
 }

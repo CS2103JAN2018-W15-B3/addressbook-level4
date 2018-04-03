@@ -16,6 +16,7 @@ import seedu.address.model.event.DuplicateEventException;
 import seedu.address.model.event.Event;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -117,6 +118,15 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(target, editedToDo);
 
         addressBook.updateToDo(target, editedToDo);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void updateGroup(Group target, Group editedGroup)
+            throws DuplicateGroupException, GroupNotFoundException {
+        requireAllNonNull(target, editedGroup);
+
+        addressBook.updateGroup(target, editedGroup);
         indicateAddressBookChanged();
     }
 

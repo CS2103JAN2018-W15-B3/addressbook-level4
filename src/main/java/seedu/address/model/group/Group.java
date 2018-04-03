@@ -21,6 +21,14 @@ public class Group {
         this.information = information;
         this.personList = new UniquePersonList();
     }
+    /**
+     * Every field must be present and not null.
+     */
+    public Group(Information information, UniquePersonList personList) {
+        requireAllNonNull(information);
+        this.information = information;
+        this.personList = personList;
+    }
 
     public Information getInformation() {
         return information;
